@@ -8,30 +8,8 @@
     <link rel="icon" href="img/flowers.png" type="image/x-icon" />
     <title>Flower</title>
   </head>
-  <script>
-    const music = document.getElementById("music");
-    const startButton = document.getElementById("startMusic");
-
-    startButton.addEventListener("click", async () => {
-        try {
-            music.volume = 0.8;
-            await music.play();
-
-            startButton.classList.add("hidden");
-        } catch (error) {
-            startButton.textContent = "Presiona nuevamente para escuchar";
-            console.error("No se pudo reproducir la música:", error);
-        }
-    });
-</script>
   <body class="not-loaded">
-    <audio id="music" preload="auto" loop>
-    <source src="sound/Inolvidable.mp3" type="audio/mpeg">
-</audio>
-
-<button id="startMusic" class="start-music">
-    🌻 Toca para iniciar
-</button>
+    <audio src="sound/Reik - Inolvidable (Letra  Lyrics).mp3" autoplay></audio>
     <div id="lyrics">
      
     </div>
