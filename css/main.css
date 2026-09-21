@@ -19,7 +19,37 @@ body {
   overflow: hidden;
   perspective: 1000px;
 }
+.start-music {
+    position: fixed;
+    z-index: 1000;
+    top: 50%;
+    left: 50%;
 
+    padding: 16px 28px;
+    transform: translate(-50%, -50%);
+
+    border: none;
+    border-radius: 999px;
+
+    color: #332400;
+    font-size: 1rem;
+    font-weight: bold;
+
+    background: linear-gradient(135deg, #fff58a, #ffd83d, #f3a900);
+
+    box-shadow:
+        0 10px 35px rgba(255, 196, 0, 0.45),
+        0 0 25px rgba(255, 216, 61, 0.4);
+
+    cursor: pointer;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.start-music.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.8);
+}
 #lyrics {
   font-size: 28px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
