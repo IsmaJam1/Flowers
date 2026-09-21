@@ -1,87 +1,386 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,900&display=swap');
-*{
-    font-family: 'Poppins',cursive;
+/* ==============================
+   CONFIGURACIÓN GENERAL
+   ============================== */
+
+:root {
+    --background-dark: #020711;
+    --background-blue: #071b35;
+    --yellow: #ffd83d;
+    --yellow-light: #fff3a0;
+    --white: #ffffff;
+    --card-background: rgba(6, 17, 35, 0.7);
 }
 
-.botones{
-    padding: 9px;
-    border-radius: 80px;
-    background-color: transparent;
-    border: none;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.botones a{
-    background-color: #0a2be9;
-    padding: 9px;
-    border-radius: 80px;
-    -webkit-border-radius: 80px;
-    -moz-border-radius: 80px;
-    -ms-border-radius: 80px;
-    -o-border-radius: 80px;
-
+html {
+    min-height: 100%;
 }
 
-.botones a:focus{
-    background-color: rgb(50, 194, 194);
+body {
+    min-height: 100vh;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: var(--white);
+
+    background:
+        radial-gradient(
+            circle at 50% 110%,
+            rgba(39, 166, 100, 0.35),
+            transparent 42%
+        ),
+        radial-gradient(
+            circle at 50% -15%,
+            #183764 0%,
+            var(--background-blue) 40%,
+            var(--background-dark) 100%
+        );
 }
 
-.greetings{
-    font-size: 7rem;
-    font-weight: 900;
+/* ==============================
+   FONDO DECORATIVO
+   ============================== */
+
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
 }
-.greetings > span{
-    animation: glow 2.5s ease-in-out infinite;
+
+.background::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    opacity: 0.55;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.9) 0 1px,
+            transparent 1.5px
+        ),
+        radial-gradient(
+            circle,
+            rgba(255, 225, 105, 0.85) 0 1px,
+            transparent 1.5px
+        );
+
+    background-position:
+        4vw 8vh,
+        15vw 20vh;
+
+    background-size:
+        20vw 24vh,
+        27vw 31vh;
+
+    animation: stars 4s ease-in-out infinite alternate;
 }
-@keyframes glow{
-    0%, 100%{
-        color: #fff;
-        text-shadow: 0 0 12px #39c6d6, 0 0 50px #39c6d6, 0 0 100px #39c6d6;
-    }
-    10%, 90%{
-        color: #111;
-        text-shadow: none;
-    }
+
+.light {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+    background: var(--yellow-light);
+
+    box-shadow:
+        0 0 8px var(--yellow),
+        0 0 18px rgba(255, 216, 61, 0.8);
+
+    animation: float 5s ease-in-out infinite;
 }
-.greetings > span:nth-child(2){
-    animation-delay: .2s ;
+
+.light--1 {
+    top: 18%;
+    left: 12%;
 }
-.greetings > span:nth-child(3){
-    animation-delay: .4s ;
-}
-.greetings > span:nth-child(4){
-    animation-delay: .6s;
-}
-.greetings > span:nth-child(5){
-    animation-delay: .8s;
-}
-.greetings > span:nth-child(6){
+
+.light--2 {
+    top: 30%;
+    right: 15%;
     animation-delay: 1s;
 }
 
-.description{
-    font-size: 1.5rem;
+.light--3 {
+    bottom: 20%;
+    left: 22%;
+    animation-delay: 2s;
+}
+
+.light--4 {
+    bottom: 28%;
+    right: 25%;
+    animation-delay: 0.5s;
+}
+
+.light--5 {
+    top: 12%;
+    right: 38%;
+    animation-delay: 1.5s;
+}
+
+/* ==============================
+   CONTENIDO PRINCIPAL
+   ============================== */
+
+.welcome {
+    position: relative;
+    z-index: 10;
+
+    width: min(92%, 680px);
+    padding: 20px;
+}
+
+.welcome__card {
+    padding: clamp(32px, 7vw, 60px) clamp(22px, 6vw, 55px);
+
+    text-align: center;
+
+    border: 1px solid rgba(255, 230, 110, 0.22);
+    border-radius: 30px;
+
+    background: var(--card-background);
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.45),
+        inset 0 1px rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(12px);
+    animation: card-appear 1.2s ease both;
+}
+
+.welcome__label {
+    margin-bottom: 18px;
+
+    color: var(--yellow-light);
+    font-size: clamp(0.78rem, 2vw, 0.95rem);
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* ==============================
+   SALUDO ANIMADO
+   ============================== */
+
+.greetings {
+    display: flex;
+    justify-content: center;
+
     margin-bottom: 20px;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(4rem, 16vw, 8rem);
+    line-height: 1;
 }
 
-.button a{
-    text-decoration: none;
+.greetings span {
+    display: inline-block;
+
+    color: var(--yellow);
+    text-shadow:
+        0 0 8px rgba(255, 216, 61, 0.8),
+        0 0 24px rgba(255, 195, 0, 0.55);
+
+    animation:
+        letter-appear 0.8s ease var(--delay) both,
+        letter-float 2.6s ease-in-out
+        calc(var(--delay) + 0.8s) infinite;
+}
+
+/* ==============================
+   DESCRIPCIÓN
+   ============================== */
+
+.description {
+    margin-bottom: 34px;
+}
+
+.description p {
+    margin-bottom: 8px;
+
+    color: var(--white);
+    font-size: clamp(1.05rem, 3vw, 1.4rem);
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.description span {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+/* ==============================
+   BOTÓN
+   ============================== */
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    min-width: 210px;
+    padding: 14px 24px;
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 999px;
+
+    color: #362600;
     font-size: 1rem;
-    color: #111;
+    font-weight: 700;
+    text-decoration: none;
+
+    background: linear-gradient(
+        135deg,
+        #fff58a,
+        var(--yellow),
+        #f3a900
+    );
+
+    box-shadow:
+        0 10px 30px rgba(255, 190, 0, 0.25),
+        inset 0 1px rgba(255, 255, 255, 0.7);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
 }
 
-@media screen and (max-width:574px){
-    .greetings{
-        display: block;
-        font-size: 4rem;
-        font-weight: 800;
-        text-align: center;
+.button:hover {
+    transform: translateY(-4px) scale(1.03);
+    filter: brightness(1.08);
+
+    box-shadow:
+        0 15px 38px rgba(255, 190, 0, 0.4),
+        inset 0 1px rgba(255, 255, 255, 0.8);
+}
+
+.button:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+.button:focus-visible {
+    outline: 3px solid var(--white);
+    outline-offset: 5px;
+}
+
+.button__icon {
+    font-size: 1.25rem;
+    transition: transform 0.3s ease;
+}
+
+.button:hover .button__icon {
+    transform: rotate(15deg) scale(1.15);
+}
+
+/* ==============================
+   ANIMACIONES
+   ============================== */
+
+@keyframes card-appear {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.96);
     }
-    .description{
-        font-size: 2rem;
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
-    
-    .button a{
-        font-size: 1rem;
+}
+
+@keyframes letter-appear {
+    from {
+        opacity: 0;
+        transform: translateY(-35px) rotate(-8deg);
     }
-    
+
+    to {
+        opacity: 1;
+        transform: translateY(0) rotate(0);
+    }
+}
+
+@keyframes letter-float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes float {
+    0%,
+    100% {
+        opacity: 0.25;
+        transform: translateY(18px) scale(0.7);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(-22px) scale(1);
+    }
+}
+
+@keyframes stars {
+    from {
+        opacity: 0.35;
+    }
+
+    to {
+        opacity: 0.7;
+    }
+}
+
+/* ==============================
+   DISEÑO PARA CELULARES
+   ============================== */
+
+@media (max-width: 600px) {
+    .welcome {
+        width: 94%;
+        padding: 12px;
+    }
+
+    .welcome__card {
+        padding: 35px 18px;
+        border-radius: 24px;
+    }
+
+    .greetings {
+        font-size: clamp(4rem, 22vw, 6rem);
+    }
+
+    .button {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+/* Reduce las animaciones si el usuario lo solicita */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
 }
